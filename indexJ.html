@@ -1,0 +1,19 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+Hello ksuweb.com enthusiasts! Ajax demo (J)!
+<div id = "demo">Click to see the text in the secret file</div>
+<button type="button" id="changeButton">Click me!</button>
+</body>
+<script>
+    $(document).ready(function(){
+        $("#changeButton").click(function(){
+            //document.getElementById("demo").innerHTML = "This is some spicy jquery text";
+            //$("#demo").text("hi! this is some nicccceeee text")
+            $("#demo").load("sample.txt")
+        });
+    });
+</script>
+</html>

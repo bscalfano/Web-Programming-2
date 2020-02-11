@@ -1,0 +1,19 @@
+<html>
+<body>
+Hello ksuweb.com enthusiasts! Ajax demo version A!
+<div id = "demo">Click to see the text in the secret file</div>
+<button type="button" onclick="update()">Click me!</button>
+</body>
+<script>
+    function update(){
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if ((this.readyState == 4) && (this.status == 200)){
+            document.getElementById("demo").innerHTML = this.responseText;
+        }
+    }
+    xhttp.open("GET", "sample.txt", true);
+    xhttp.send();
+    }
+</script>
+</html>
