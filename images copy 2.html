@@ -1,0 +1,43 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Images</h1>
+<div class="w3-row">
+    <div id="sidebar" class="w3-col s4 w3-pale-green">
+    </div>
+    <div id="picture" class="w3-col s8 w3-pale-blue">
+    </div>
+  </div>
+<div id="sidebar"></div>
+<button type="button" id="changebutton">Change Text</button>
+</body>
+<script>
+function format(key, val) {
+    img = '<img src="' + val + '" alt="' + key + '" style="width:100%"/>'
+    caption = '<div class="w3-container w3-center"><p>' + key + '</p></div>'
+    card = '<div class="w3-card-4">' + img + caption + '</div>'
+    return card
+}
+$(document).ready(function() {
+    $("#changebutton").click(function() {
+            //document.getElementById("demo").innerHTML = "This is some new text.";
+            //$("#demo").text("Hi! This is some more JQuery-loaded text...")
+            //$("#demo").load("image_list");
+            $.getJSON("images.json", function(data) {
+                var items = [];
+                $.each( data, function( key, val ) {
+                    //items.push( "<li id='" + key + "'>" + val + "</li>" );
+                    items.push(format(key, val))
+                });
+                //$("#sidebar").text(items.join(""))
+                $("#sidebar").html(items.join(""))
+            });
+        });
+    });
+</script>
+</html>
+
