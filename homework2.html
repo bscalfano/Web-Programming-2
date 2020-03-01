@@ -1,0 +1,37 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="w3-container w3-blue">
+        <h1>Welcome to a cool W3.CSS example page!</h1>
+    </div>
+    <div class="w3-bar w3-dark-gray">
+        <div class="w3-bar-item w3-button"><a>Sample Link 1</a></div>
+        <div class="w3-bar-item w3-button"><a>Sample Link 2</a></div>
+        <div class="w3-bar-item w3-button"><a>Sample Link 3</a></div>
+        <div class="w3-bar-item w3-button"><a>Sample Link 4</a></div>
+    </div>
+    <div class="w3-sidebar w3-light-blue">
+        <div class="w3-button" id="home-button" style="text-align:left; width:100%"><a>Home</a></div>
+        <div class="w3-button" style="text-align:left; width:100%"><a>About Us</a></div>
+        <div class="w3-button" style="text-align:left; width:100%"><a>Web Programming II</a></div>
+        <div class="w3-button" id="brian-button" style="text-align:left; width:100%"><a>About Brian Scalfano</a></div>
+    </div>
+    <div id="page-content" style="margin-left:14%;">
+        <div><p>This webpage is for homework 2 (and now 3!). It utilizes W3.CSS to make it look fancier than it would without CSS. It also uses ajax and stuff.</p></div>
+        <div class="w3-panel w3-cyan" style="width:25%">Look at this cool panel you can make!</div>
+    </div>
+</body>
+<script>
+    var brianImg = '<div class="w3-card w3-cyan" style="width:25%"><div class="w3-center"><img src="brian.jpg" style="width:95%;"/><p>Brian Scalfano is a cool guy</p></div></div>';
+    $("#brian-button").click(function(){
+        document.getElementById("page-content").innerHTML = brianImg;
+    });
+    var homeText = '<div><p>This webpage is for homework 2 (and now 3!). It utilizes W3.CSS to make it look fancier than it would without CSS. It also uses ajax and stuff.</p></div><div class="w3-panel w3-cyan" style="width:25%">Look at this cool panel you can make!</div>'
+    $("#home-button").click(function(){
+        document.getElementById("page-content").innerHTML = homeText;
+    });
+</script>
+</html>
