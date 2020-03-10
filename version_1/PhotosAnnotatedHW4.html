@@ -1,0 +1,122 @@
+// Beginning of HTML
+<html>
+
+// Beginning of head. Things that are not loaded into the web page are put here, such as the link to the style sheet.
+<head>
+
+    // Allows us to control the viewport, giving better control of the sizing of our web page.
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    // Links to W3 School's style sheet, W3.CSS.
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    // Connects to Google's API for Ajax use
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+// End of head.
+</head>
+
+// Beginning of body. All viewable HTML elements are put here.
+<body>
+
+// Division for a row of objects.
+<div class="w3-cell-row">
+
+  // Division for cell within the row.
+  <div class="w3-cell" style="width:15%">
+
+    // Division for content within the cell.
+    <div id="thumbnails" class="w3-sidebar w3-light-grey" style="width:15%;"></div>
+
+  // End of cell division.
+  </div>
+
+  // Division for cell within the row.
+  <div class="w3-cell w3-display-container">
+
+    // Division for content within the cell.
+    <div id="full-size-picture" class="w3-center w3-margin"><p>OK</p></div>
+
+  // End of cell division.
+  </div>
+
+// End of row division.
+</div>
+
+// End of body.
+</body>
+
+// Beginning of JavaScript. Functions used to fill in content are written within.
+<script>
+
+// Declaration for the function that formats the thumbnails. Returns a division with an image and its caption.
+function format_thumbnail(key, val) {
+
+    // Creates a variable that stores the image tag.
+    img = '<img src="' + val + '" alt="' + key + '" style="width:100%"/>';
+
+    // Creates a variable that stores the caption within a p tag.
+    caption = '<div class="w3-container w3-center"><p>' + key + '</p></div>';
+
+    // Creates a variable that stores a division that contains both the image and its caption.
+    card = '<div id="' + val + '" class="thumbnail w3-margin w3-card-4">' + img + caption + '</div>';
+
+    // Returns the card that was created in the previous line
+    return card;
+}
+
+// Declares a function that runs when the DOM is loaded.
+$(document).ready(function() {
+
+    // Creates a key by flooring the result of a random number times 1000.
+    key = Math.floor(Math.random() * 1000)
+
+    // Gets the JSON file storing the names of all of the images, and loads it into the variable "data".
+    $.getJSON("/api/images_list/"+key, function(data) {
+
+        // Creates a variable named items, and declares it as an array.
+        var items = [];
+
+        // Declares a function that will be run on each element in the data set
+        $.each( data, function( key, val ) {
+
+            // Pushes completed image cards into the items array.
+            items.push(format_thumbnail(key, val));
+        });
+
+        // Joins the elements of the items array into a string, separating them with the characters "", and stores them in the variable "html".
+        html = items.join("")
+
+        // Replaces all divisions with the id "thumbnails" to the HTML string stored in the variable html.
+        $("#thumbnails").html(html)
+
+        // Creates a function that runs when divisions with an id of "thumbnail" are clicked.
+        $(".thumbnail").click( function() {
+          
+            // Creates the variable "id", and sets it to the id of the thumbnail image.
+            id = $(this).attr("id")
+
+            // Creates the variable "ht", and sets it to the height of the window.
+            ht = window.innerHeight
+
+            // Creates the variable "img", and makes it an image tag that contains all previous information stored.
+            img = '<img src="' + id + '" alt="' + id + '" class="w3-image w3-margin-top" style="height:' + (ht - 90) + 'px"/>';
+
+            // Creates the variable "caption", and sets it to a division containing a p tag that displays the id of the image. 
+            caption = '<div class="w3-container w3-center"><p>' + id + '</p></div>';
+
+            // Creates the variable "card", which is a combination of the previously created image and caption.
+            card = '<div class="w3-margin w3-card-4">' + img + caption + '</div>';
+
+            // Replaces the division with the id "full-size-picture" with the html of the card that was just created.
+            $("#full-size-picture").html(card);
+        });
+    });
+});
+
+// End of script
+</script>
+
+// End of HTML
+</html>
+
